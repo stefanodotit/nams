@@ -13,7 +13,7 @@ npm i --save-dev nams
 ## How it works
 **The structure of `Mocks` folder need to be created for simulate url path and in the final folder need to have a json or javascript index file.** <br>
 When NAMS reach the last folder start to search a `index.json` file, if not exist start to search a `index.js` and try to exec the function passing down this params `{request, reply, folderPath}` and send the output. <br>
-If u want to use the fastify hook `preHandler` you need to create a file called `prehandler.js` and put it in the same folder where `index.json/js` is located. <br>
+If u want to use the fastify hook `preHandler` you need to create a file called `prehandler.js` and put it in the same folder where `index.[json/js]` is located. <br>
 
 ### Steps
 1. Search `prehandler.js` and if present exec the function with this args: `(request, reply, next)`
@@ -23,6 +23,9 @@ If u want to use the fastify hook `preHandler` you need to create a file called 
 ## Session
 NAMS use `fastify-session` and u can use it on `prehandler.js` file. [DOC LINK](https://github.com/SerayaEryn/fastify-session)
 
+## Proxy
+By default `NAMS` give a 404 code status when it can't find a file. If u want to mock only some request you can set your custom proxy. In this case when `NAMS` can't find a file, use your proxy address for retrieve the answer.
+
 ## Import and run
 ### Script side
 ```
@@ -30,16 +33,12 @@ require('nams')(options)
 ```
 Rember: when your node script has finished use `process.exit(1/0)`. 
 
-### Node side
-```
-node index.js [--port XXXX --folderPath YYYY]
-```
-
 ## Options Object
 ```
 {
     port: custom NAMS port (DEFAULT: 4444),
-    folderPath: if u want to override the default folderPath and use other mock files
+    folderPath: path of a folder where files need to be present,
+    proxy: if u want to proxy all 404 request insert here URL and automatically NAMS (if cannot find file) try to retreive API on external server
 }
 ```
 
