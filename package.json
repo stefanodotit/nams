@@ -1,6 +1,6 @@
 {
   "name": "nams",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "NAMS (New Amazing Mock Server) - A zero config mock server for node",
   "repository": "https://github.com/stefanodotit/nams.git",
   "main": "index.js",
